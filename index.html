@@ -32,8 +32,16 @@
     footer { background: rgba(128, 71, 28, 0.8); color: white; text-align: center; padding: 4px; position: fixed; bottom: 0; width: 100%; font-size: 1.2vh; backdrop-filter: blur(4px); }
 
     /* Protected content hidden until correct password */
-    .protected { display: none; }
+.protected {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
 
+.protected.active {
+  opacity: 1;
+  pointer-events: auto;
+}
     /* Overlay / Passwort-UI */
     #pwOverlay {
       position: fixed;
@@ -106,7 +114,7 @@
       <h1><img src="Herz.png" height="2%"> <img src="Herz.png" height="3%"> Love You <img src="Herz.png" height="3%"> <img src="Herz.png" height="2%"></h1>
     </header>
     <nav>
-      <a href="Index.html">Startseite</a>
+      <a href="index.html">Startseite</a>
       <a href="Timer.html">Timer</a>
       <a href="Bilder.html">Bilder</a>
       <a href="Advendskalender.html">Advendskalender</a>
@@ -162,11 +170,10 @@
         }
       }
 
-      function unlock(){
-        overlay.style.display = "none";
-        protectedContent.classList.remove("protected");
-        overlay.setAttribute("aria-hidden", "true");
-      }
+function unlock(){
+  overlay.style.display = "none";
+  protectedContent.classList.add("active");
+}
 
       // Optional: Logout-Funktion (entkommentieren, falls du sie willst)
       // function logout(){ localStorage.removeItem("hopfenhasi_auth"); location.reload(); }
@@ -175,3 +182,4 @@
   </script>
 </body>
 </html>
+
