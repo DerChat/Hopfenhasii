@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hopfenhasi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Dancing+Script:wght@400..700&family=Raleway+Dots&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-image: url("backgroundKalender2.jpg");
+            background-repeat: repeat;
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        
+        }
+
+        header {
+            font-family: "Dancing Script", cursive;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            font-size: 2vh;
+            background-color: #65350F;
+            color: white;
+            padding: 2px;
+            text-align: center;
+        }
+
+        nav {
+            font-family: "Dancing Script", cursive;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            font-size: 2vh;
+            background-color: #80471C;
+            padding: 1vw;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        nav a:hover {
+        text-shadow: 0 0 10px white;
+        transform: scale(1.1);
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            font-family: "Amatic SC", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+            display: flex;
+            justify-content: center; /* horizontal */
+            flex-wrap: wrap;
+            align-items: center;     /* vertikal */
+            align-content: start;
+            height: 60vh;           /* ganze Fensterhöhe */ 
+            gap: 40px;  
+            padding: 10px;
+        }
+
+
+
+        footer {
+            background-color: #80471C;
+            color: white;
+            text-align: center;
+            padding: 2px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 1vh;
+        }
+
+        h2 {
+        color: #ffffff;
+        }
+
+
+        p {
+        margin: 20px;
+        padding: 10px;
+        margin-top: 200px;
+        font-size: 7vh;
+        color: white;
+        }
+
+ 
+
+        .tuerchen {
+            font-family: "Amatic SC", sans-serif;
+            background-color: rgba(163, 31, 31, 0.8);
+            color: white;
+            font-size: 10vh;
+            border: 2px solid #fff;
+            border-radius: 10px;
+            width: 200px;
+            height: 200px;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            margin: 10px;
+            
+        }
+
+        .tuerchen:hover {
+            transform: scale(1.1);
+            background-color: rgba(255, 80, 80, 1);
+        }
+
+        .opened {
+            background-color: #0a3d0a !important;
+            color: #FFD700;
+        }
+
+
+       .snowflake {
+            position: fixed;
+            top: 0;
+            color: white;
+            font-size: 1.5em;
+            animation: fall linear infinite;
+            z-index: 9999;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .popup {
+            width: 50vw;
+            height: 50vh;
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgb(255, 255, 255);
+            padding: 30px;
+            border-radius: 15px;
+            font-size: 2.5vh;
+            color: #65350F;
+            box-shadow: 0 0 10px #fff;
+            z-index: 100000;
+            text-align: center;
+        }
+
+        .popup.show {
+            display: block;
+            display: flex;              
+            flex-direction: column;     
+            justify-content: center;    
+            align-items: center;     
+        }
+        .popup.show2 {
+            display: block;
+    
+        }
+        
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><img src="Herz.png" height="1%" width="1%">   <img src="Herz.png" height="1.5%" width="1.5%">   Advendskalender   <img src="Herz.png" height="1.5%" width="1.5%">   <img src="Herz.png" height="1%" width="1%"></h1>
+        
+    </header>
+
+    <nav>
+        <a href="index.html">Startseite</a>
+        <a href="Timer.html">Timer</a>
+        <a href="Bilder.html">Bilder</a>
+        <a href="Advendskalender.html">Advendskalender</a>
+        
+    </nav>
+
+    <main>
+
+            <div class="popup" id="popup"></div>
+    </main>
+
+    <footer>
+        <img src="Herz.png" height="0.5%" width="0.5%"> für meinen schatz <img src="Herz.png" height="0.5%" width="0.5%">
+    </footer>
+
+    <script>
+        //Buttons erstellen türchen
+        window.onload = function() {
+        const buttons = [];   
+        const main = document.querySelector("main");
+            for (let i = 1; i < 25; i++) {
+                const btn = document.createElement("button");
+                btn.textContent = i;
+                btn.className = "tuerchen";
+                main.appendChild(btn);   
+                buttons.push(btn);
+
+                if (i === 1) {
+                btn.onclick = function() { openDoor(btn,"Der Kalender ist nur für dich alleine mein baby, damit du auch mal siehst was ich so kann. Du bekommst jeden Tag ein Bild von uns. Kannst dich ruhig auf der restlichen Website umschauen. Hat echt Spaß gemacht das zu programmieren. Hoffe es gefällt dir <3","Zsm1.jpeg","2025-12-01T00:00:00"); };
+                }else if (i === 2) {
+                btn.onclick = function() { openDoor(btn,"Ich erinner mich noch ganz genau als das Bild enstanden ist. War so ein schöner Geburtstag. Hab jede Sekunde mit dir genossen.","Zsm2.jpeg","2025-12-02T00:00:00"); };
+                }else if (i === 3) {
+                btn.onclick = function() { openDoor(btn,"Ich liebe dich und werde immer da sein für dich.","Zsm3.jpeg","2025-12-03T00:00:00"); };
+                }else if (i === 4) {
+                btn.onclick = function() { openDoor(btn,"Das war vor der Ersten Familienfeier von mir, mit dir zusammmen.","Zsm4.jpeg","2025-12-04T00:00:00"); };
+                }else if (i === 5) {
+                btn.onclick = function() { openDoor(btn,"Du kannst alles schaffen baby","Zsm5.jpeg","2025-12-05T00:00:00"); };
+                }else if (i === 6) {
+                btn.onclick = function() { openDoor(btn,"Du bist die Beste und Hübscheste. Ich liebe alles an dir.","Zsm6.jpeg","2025-12-06T00:00:00"); };
+                }else if (i === 7) {
+                btn.onclick = function() { openDoor(btn,"Der Tag als ich aus dem Urlaub heimgekommen bin und wir zusammen auf dem Geburtstag waren. War so ein schöner Abend.","Zsm7.jpeg","2025-12-07T00:00:00"); };
+                }else if (i === 8) {
+                btn.onclick = function() { openDoor(btn,"Ich möchte jeden Moment mit dir teilen. Will in jedem Hoch und Tief mit dir zusammen sein","Zsm8.jpeg","2025-12-08T00:00:00"); };
+                }else if (i === 9) {
+                btn.onclick = function() { openDoor(btn,"Die Zeit in Prag zusammen mit dir war immer so besonders. Ich liebe dich.","Zsm9.jpeg","2025-12-09T00:00:00"); };
+                }else if (i === 10) {
+                btn.onclick = function() { openDoor(btn,"Jeder Kuss mit dir ist so besonders","Zsm10.jpeg","2025-12-10T00:00:00"); };
+                }else if (i === 11) {
+                btn.onclick = function() { openDoor(btn,"Das war das erste Halloween (Glühweinantrinken), was ich je gefeiert habe.","Zsm11.jpeg","2025-12-11T00:00:00"); };
+                }else if (i === 12) {
+                btn.onclick = function() { openDoor(btn,"Das war an dem Geburtstag von Alina, Henning und Lukas. Finde es so toll das unsere Freundesgruppen sich überschneiden. Das verbindet uns noch mehr.","Zsm12.jpeg","2025-12-12T00:00:00"); };
+                }else if (i === 13) {
+                btn.onclick = function() { openDoor(btn,"6 Monate sind wir jetzt zusammen. Ein halbes Jahr. Die Zeit geht immer so schnell vorbei mit dir. Das Bild ist an dem Abend entstanden, wo wir warscheinlich mit das erste Mal miteinander geredet haben. Es ist einach schon so lang her, aber ich erinner mich gerne zurück. Es ist einfach so viel passiert","Zsm13.jpeg","2025-12-13T00:00:00"); };
+                }else if (i === 14) {
+                btn.onclick = function() { openDoor(btn,"Es vergeht keine Stunde, in welcher du nicht in meinen Kopf bist.","Zsm14.jpeg","2025-12-14T00:00:00"); };
+                }else if (i === 15) {
+                btn.onclick = function() { openDoor(btn,"Ich möchte jeden Moment in meinen Leben mit dir teilen","Zsm15.jpeg","2025-12-15T00:00:00"); };
+                }else if (i === 16) {
+                btn.onclick = function() { openDoor(btn,"Du bist so schlau. Ich liebe dich","Zsm16.jpeg","2025-12-16T00:00:00"); };
+                }else if (i === 17) {
+                btn.onclick = function() { openDoor(btn,"Das ist einer meiner Lieblingsfotos von uns. Du siehst da so hübsch aus","Zsm17.jpeg","2025-12-17T00:00:00"); };
+                }else if (i === 18) {
+                btn.onclick = function() { openDoor(btn,"Das war am Funkensfest in Geisa. Vorher waren wir bei Henning vorglühen. Hab jeden Moment mit dir genossen","Zsm25.jpeg","2025-12-18T00:00:00"); };
+                }else if (i === 19) {
+                btn.onclick = function() { openDoor(btn,"Männertag dieses Jahr. Das Bild ist kurz vor meinen Beinbruch entstanden haha. War trotzdem so ein wundervoller Tag","Zsm19.jpeg","2025-12-19T00:00:00"); };
+                }else if (i === 20) {
+                btn.onclick = function() { openDoor(btn,"Du bist das hübscheste Mädchen, dass ich kenne.","Zsm20.jpeg","2025-12-20T00:00:00"); };
+                }else if (i === 21) {
+                btn.onclick = function() { openDoor(btn,"Das Bild ist an dem Tag enstanden, als du aus dem Urlaub kamst. Ist wohl einer der einzigen Bilder auf welchen du mehr gebräunt bist als ich. So ein toller Abend mit dir.","Zsm21.jpeg","2025-12-21T00:00:00"); };
+                }else if (i === 22) {
+                btn.onclick = function() { openDoor(btn,"Bei jeder Nachicht die du mir schreibst freue ich mich","Zsm22.jpeg","2025-12-22T00:00:00"); };
+                }else if (i === 23) {
+                btn.onclick = function() { openDoor(btn,"Morgen ist Weihnachten. Ich denke mal die Vorfreude bei dir ist groß. Ich liebe dich","Zsm23.jpeg","2025-12-23T00:00:00"); };
+                }else if (i === 24) {
+                btn.onclick = function() { openDoor(btn,"Frohe Weihnachten Baby. Am liebsten hätte ich ein weihnachtliches Bild von uns genommen, aber ist ja das erste Weihnachten von uns zusammen haha. Ich liebe dich","Zsm24.jpeg","2025-12-24T00:00:00"); };
+                }                      
+            }
+
+
+            /*btn.onclick = function() {
+                openDoor1();
+            };*/
+        
+        };
+
+
+        //türchen shit
+        const popup = document.getElementById('popup');
+        function openDoor(day, element) {
+            element.classList.add('opened');
+            popup.textContent = messages["assasas"];
+            popup.classList.add('show');
+            setTimeout(() => popup.classList.remove('show'), 4000);
+        }
+
+        function wait(startDate){
+                const now = new Date();
+                const diff = startDate - now ;
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((diff / (1000 * 60)) % 60);
+                const seconds = Math.floor((diff / 1000) % 60);
+
+                popup.innerHTML = `Scheint so als müsstest du dich noch <br><strong>${days}</strong>    Tage <br> <strong>${hours}</strong>     Stunden <br> <strong>${minutes}</strong>     Minuten<br>  <strong>${seconds}</strong>     Sekunden <br> gedulden bis sich dieses türchen öffnet `;
+                popup.appendChild(document.createElement("p"))
+                popup.classList.add('show2');
+                setTimeout(() => popup.classList.remove('show2'), 5000);              
+        }
+
+        function openDoorAllg(element){ // bei jedem türchen allgemeine sachen
+            element.classList.add('opened');
+            popup.innerHTML = "";
+            popup.classList.add('show');
+            setTimeout(() => popup.classList.remove('show'), 10000);    
+        }
+
+        //türchen 1 - 24 
+        function openDoor(element, text, pic, date)
+        {
+            const startDate = new Date(date);
+            const now = new Date();
+            if (now > startDate)
+            {
+                openDoorAllg(element);
+                // Neues Bild erstellen
+                const img = document.createElement("img");
+                img.src = pic;  // hier den Pfad zu deinem Bild einfügen
+                img.style.maxWidth = "50vw";  // passt die Größe an
+                img.style.maxHeight = "50vh";
+                img.style.borderRadius = "10px";
+                popup.appendChild(img); 
+                //Text einfügen
+                popup.innerHTML = popup.innerHTML +text;               
+            }else{
+                wait(startDate);
+            }
+        }
+        function openDoor1(element) {
+            const startDate = new Date("2025-10-26T00:00:00");
+            const now = new Date();
+            if (now > startDate)
+            {
+                openDoorAllg(element);
+                // Neues Bild erstellen
+                const img = document.createElement("img");
+                img.src = "Zsm1.jpeg";  // hier den Pfad zu deinem Bild einfügen
+                img.style.maxWidth = "50vw";  // passt die Größe an
+                img.style.maxHeight = "50vh";
+                img.style.borderRadius = "10px";
+                popup.appendChild(img);                
+            }else{
+                wait(startDate);
+            }
+
+        }
+        function openDoor2(element) {
+            const startDate = new Date("2025-10-26T00:00:00");
+            const now = new Date();
+            if (now > startDate)
+            {
+                openDoorAllg(element);
+                popup.innerHTML = "ich liebe dich";
+            }else{
+                wait(startDate);
+            }
+        }
+
+
+
+        //Schneeflocken effekt 
+        const snowflakes = "❄️❅❆".split("");
+        setInterval(() => {
+        const flake = document.createElement('div');
+        flake.classList.add('snowflake');
+        flake.textContent = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+        flake.style.left = Math.random() * 100 + "vw";
+        flake.style.animationDuration = (Math.random() * 5 + 5) + "s";
+        document.body.appendChild(flake);
+        setTimeout(() => flake.remove(), 10000);
+        }, 300);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hopfenhasi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Dancing+Script:wght@400..700&family=Raleway+Dots&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-image: url("Zsm18.jpeg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        
+        }
+
+        header {
+            font-family: "Dancing Script", cursive;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            font-size: 2vh;
+            background-color: #65350F;
+            color: white;
+            padding: 2px;
+            text-align: center;
+        }
+
+        nav {
+            font-family: "Dancing Script", cursive;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            font-size: 2vh;
+            background-color: #80471C;
+            padding: 1vw;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        nav a:hover {
+        text-shadow: 0 0 10px white;
+        transform: scale(1.1);
+        }
+        main {
+            font-family: "Amatic SC", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+            display: flex;
+            justify-content: center; /* horizontal */
+            align-items: center;     /* vertikal */
+            height: 60vh;           /* ganze Fensterhöhe */ 
+        }
+
+        footer {
+            background-color: #80471C;
+            color: white;
+            text-align: center;
+            padding: 2px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 1vh;
+        }
+
+        h2 {
+        color: #ffffff;
+        }
+
+        p {
+        color: #ffffff;    
+        }
+
+        #timer {
+        font-size: 5vh;
+        color: white;
+        
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><img src="Herz.png" height="1%" width="1%">   <img src="Herz.png" height="1.5%" width="1.5%">   Timer   <img src="Herz.png" height="1.5%" width="1.5%">   <img src="Herz.png" height="1%" width="1%"> </h1>
+        
+    </header>
+
+    <nav>
+        <a href="Index.html">Startseite</a>
+        <a href="Timer.html">Timer</a>
+        <a href="Bilder.html">Bilder</a>
+        <a href="Advendskalender.html">Advendskalender</a>
+    </nav>
+
+    <main>
+
+
+
+        <div id="timer"></div>
+        
+
+
+
+        <script>
+            const startDate = new Date("2025-06-13T23:00:00");
+
+            function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            document.getElementById("timer").innerHTML =
+                `Zusammen seid: <br><br> <strong>${days}</strong>    Tage <br> <strong>${hours}</strong>     Stunden <br> 
+                <strong>${minutes}</strong>     Minuten<br>  <strong>${seconds}</strong>     Sekunden<br><br> Ich liebe dich`;
+            }
+
+            setInterval(updateTimer, 1000);
+            updateTimer(); // einmal sofort aufrufen
+        </script>
+    </main>
+
+    <footer>
+        <p><img src="Herz.png" height="0.5%" width="0.5%"> für meinen schatz <img src="Herz.png" height="0.5%" width="0.5%"></p>
+    </footer>
+
+</body>
+</html>

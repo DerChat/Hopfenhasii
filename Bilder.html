@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hopfenhasi – Galerie</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Dancing+Script:wght@400..700&family=Raleway+Dots&display=swap" rel="stylesheet">
+
+  <style>
+        nav a:hover {
+      text-shadow: 0 0 10px white;
+      transform: scale(1.1);
+    }
+    html, body {
+      height: 100%; margin: 0; padding: 0; overflow-x: hidden;
+    }
+    body {
+      background: #000;
+      font-family: "Amatic SC", sans-serif;
+    }
+
+    header {
+      font-family: "Dancing Script", cursive;
+      font-weight: 700;
+      font-size: 2vh;
+      background-color: #65350F;
+      color: white;
+      padding: 5px;
+      text-align: center;
+    }
+
+    nav {
+      font-family: "Dancing Script", cursive;
+      font-weight: 700;
+      font-size: 2vh;
+      background-color: #80471C;
+      padding: 1vw;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+    }
+
+    /* --- Galerie Grid --- */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+      animation: fadeIn 1.5s ease;
+    }
+
+    /* Einzelnes Bild */
+    .imgBox {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      cursor: pointer;
+      transform: scale(1);
+      transition: 0.6s ease;
+    }
+
+    .imgBox img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.5s ease;
+    }
+
+    /* Hover Effekt */
+    .imgBox:hover img {
+      transform: scale(1.2);
+      filter: brightness(70%);
+    }
+    .imgBox:hover {
+      transform: scale(1.05);
+    }
+
+    /* Fade-In Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Vollbild Overlay */
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      animation: fadeIn 0.6s ease;
+    }
+
+    #overlay img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+      animation: zoom 0.6s ease;
+    }
+
+    @keyframes zoom {
+      from { transform: scale(0.7); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    footer {
+      background-color: #80471C;
+      color: white;
+      text-align: center;
+      padding: 3px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-size: 1vh;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1><img src="Herz.png" height="1%"> <img src="Herz.png" height="1.5%"> Bilder <img src="Herz.png" height="1.5%"> <img src="Herz.png" height="1%"></h1>
+</header>
+
+<nav>
+  <a href="Index.html">Startseite</a>
+  <a href="Timer.html">Timer</a>
+  <a href="Bilder.html">Bilder</a>
+  <a href="Advendskalender.html">Advendskalender</a>
+</nav>
+
+<!-- Galerie -->
+<div class="gallery">
+  <!-- Bilder einfügen -->
+  <script>
+    for (let i = 1; i <= 30; i++) {
+      document.write(`
+        <div class='imgBox' onclick='openOverlay("Zsm${i}.jpeg")'>
+          <img src='Zsm${i}.jpeg'>
+        </div>
+      `);
+    }
+  </script>
+</div>
+
+<!-- Overlay fürs Vollbild -->
+<div id="overlay" onclick="closeOverlay()">
+  <img id="overlayImg" src="">
+</div>
+
+<script>
+  function openOverlay(src) {
+    document.getElementById("overlayImg").src = src;
+    document.getElementById("overlay").style.display = "flex";
+  }
+  function closeOverlay() {
+    document.getElementById("overlay").style.display = "none";
+  }
+</script>
+
+<footer>
+  <img src="Herz.png" height="0.5%"> für meinen schatz <img src="Herz.png" height="0.5%">
+</footer>
+
+</body>
+</html>
