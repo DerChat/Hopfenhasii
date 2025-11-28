@@ -4,170 +4,174 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hopfenhasi</title>
-  <script>
-    // Passwortprüfung beim Laden der Seite
-    function checkPassword() {
-      let pw = prompt("Bitte Passwort eingeben:");
-      if (pw !== "728773") {
-        alert("Falsches Passwort!");
-        // Seite verlassen oder blockieren
-        window.location.href = "about:blank";
-      }
-    }
-    window.onload = checkPassword;
-  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Dancing+Script:wght@400..700&family=Raleway+Dots&display=swap" rel="stylesheet">
   <style>
-    html, body {
-      height: 100%; margin: 0; padding: 0; overflow-x: hidden;
-    }
+    html, body { height: 100%; margin: 0; padding: 0; overflow-x: hidden; font-family: "Amatic SC", sans-serif; }
+    body { background-image: url("Zsm18.jpeg"); background-size: cover; background-position: center; background-attachment: fixed; text-align: center; animation: fadeBG 2s ease; }
+    @keyframes fadeBG { from { filter: blur(8px); opacity: 0; } to { filter: blur(0); opacity: 1; } }
 
-    body {
-      background-image: url("Zsm18.jpeg");
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      text-align: center;
-      animation: fadeBG 2s ease;
-    }
+    header { font-family: "Dancing Script", cursive; font-weight: 700; font-size: 3vh; background: rgba(101, 53, 15, 0.8); color: white; padding: 8px; backdrop-filter: blur(4px); box-shadow: 0 0 10px rgba(0,0,0,0.4); animation: slideDown 1.2s ease; }
+    @keyframes slideDown { from { transform: translateY(-40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-    @keyframes fadeBG {
-      from { filter: blur(8px); opacity: 0; }
-      to { filter: blur(0); opacity: 1; }
-    }
+    nav { font-family: "Dancing Script", cursive; font-weight: 700; font-size: 2.3vh; background: rgba(128, 71, 28, 0.8); padding: 1.2vw; backdrop-filter: blur(4px); animation: fadeIn 1.5s ease; }
+    nav a { color: white; margin: 0 18px; text-decoration: none; transition: 0.3s ease; }
+    nav a:hover { text-shadow: 0 0 10px white; transform: scale(1.1); }
 
-    header {
-      font-family: "Dancing Script", cursive;
-      font-weight: 700;
-      font-size: 3vh;
-      background: rgba(101, 53, 15, 0.8);
-      color: white;
-      padding: 8px;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
-      animation: slideDown 1.2s ease;
-    }
+    main { display: flex; justify-content: center; align-items: center; height: 65vh; animation: fadeIn 2s ease; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    @keyframes slideDown {
-      from { transform: translateY(-40px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
+    .textBox { background: rgba(0,0,0,0.5); padding: 40px; border-radius: 20px; color: white; font-size: 6vh; line-height: 1.2; backdrop-filter: blur(5px); box-shadow: 0 0 20px rgba(0,0,0,0.4); animation: popIn 1.4s ease; }
+    @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .textBox img { width: 13%; animation: heartbeat 2s infinite ease-in-out; }
+    @keyframes heartbeat { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+    .mapHeart { width: 20%; margin-top: 25px; transition: 0.4s; animation: fadeIn 2.2s ease; }
+    .mapHeart:hover { transform: scale(1.1) rotate(5deg); filter: drop-shadow(0 0 10px white); }
 
-    nav {
-      font-family: "Dancing Script", cursive;
-      font-weight: 700;
-      font-size: 2.3vh;
-      background: rgba(128, 71, 28, 0.8);
-      padding: 1.2vw;
-      backdrop-filter: blur(4px);
-      animation: fadeIn 1.5s ease;
-    }
+    footer { background: rgba(128, 71, 28, 0.8); color: white; text-align: center; padding: 4px; position: fixed; bottom: 0; width: 100%; font-size: 1.2vh; backdrop-filter: blur(4px); }
 
-    nav a {
-      color: white;
-      margin: 0 18px;
-      text-decoration: none;
-      transition: 0.3s ease;
-    }
+    /* Protected content hidden until correct password */
+    .protected { display: none; }
 
-    nav a:hover {
-      text-shadow: 0 0 10px white;
-      transform: scale(1.1);
-    }
-
-    main {
-      font-family: "Amatic SC", sans-serif;
-      font-weight: 700;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 65vh;
-      animation: fadeIn 2s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .textBox {
-      background: rgba(0,0,0,0.5);
-      padding: 40px;
-      border-radius: 20px;
-      color: white;
-      font-size: 6vh;
-      line-height: 1.2;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-      animation: popIn 1.4s ease;
-    }
-
-    @keyframes popIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .textBox img {
-      width: 13%;
-      animation: heartbeat 2s infinite ease-in-out;
-    }
-
-    @keyframes heartbeat {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.15); }
-      100% { transform: scale(1); }
-    }
-
-    .mapHeart {
-      width: 20%;
-      margin-top: 25px;
-      transition: 0.4s;
-      animation: fadeIn 2.2s ease;
-    }
-
-    .mapHeart:hover {
-      transform: scale(1.1) rotate(5deg);
-      filter: drop-shadow(0 0 10px white);
-    }
-
-    footer {
-      background: rgba(128, 71, 28, 0.8);
-      color: white;
-      text-align: center;
-      padding: 4px;
+    /* Overlay / Passwort-UI */
+    #pwOverlay {
       position: fixed;
-      bottom: 0;
-      width: 100%;
-      font-size: 1.2vh;
-      backdrop-filter: blur(4px);
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.75);
+      z-index: 9999;
     }
+    .pwBox {
+      background: rgba(255,255,255,0.06);
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      color: white;
+      width: 90%;
+      max-width: 420px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+    }
+    .pwBox input {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(0,0,0,0.35);
+      color: white;
+      font-size: 1.2rem;
+    }
+    .pwBox button {
+      margin-top: 12px;
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      background: rgba(128,71,28,0.9);
+      color: white;
+      font-size: 1rem;
+    }
+    .shake { animation: shake 0.5s; }
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-8px); }
+      50% { transform: translateX(8px); }
+      75% { transform: translateX(-6px); }
+      100% { transform: translateX(0); }
+    }
+    .hint { font-size: 0.9rem; opacity: 0.8; margin-top: 8px; }
   </style>
 </head>
 <body>
-  <header>
-    <h1><img src="Herz.png" height="2%"> <img src="Herz.png" height="3%"> Love You <img src="Herz.png" height="3%"> <img src="Herz.png" height="2%"></h1>
-  </header>
-
-  <nav>
-    <a href="Index.html">Startseite</a>
-    <a href="Timer.html">Timer</a>
-    <a href="Bilder.html">Bilder</a>
-    <a href="Advendskalender.html">Advendskalender</a>
-  </nav>
-
-  <main>
-    <div class="textBox">
-      Diese Website ist nur für dich,<br>
-      weil du einfach die Beste bist.<br><br>
-      Ich liebe dich<br>
-      <a href="https://www.google.com/maps/place/Zur+Sängerwiese,+36419+Buttlar/" target="_blank">
-        <img class="mapHeart" src="braunesherz.png">
-      </a>
+  <!-- Overlay shown until correct password entered -->
+  <div id="pwOverlay" aria-hidden="false">
+    <div class="pwBox" id="pwBox">
+      <h2>Geschützt</h2>
+      <p>Gib das Passwort ein, um die Seite zu sehen.</p>
+      <input id="pwInput" type="password" autocomplete="off" placeholder="Passwort" />
+      <button id="pwBtn">Unlock</button>
+      <div class="hint">Tipp: Groß-/Kleinschreibung beachten.</div>
     </div>
-  </main>
+  </div>
 
-  <footer>
-    <img src="Herz.png" height="0.7%"> für meinen Schatz <img src="Herz.png" height="0.7%">
-  </footer>
+  <!-- Geschützter Inhalt -->
+  <div class="protected" id="protectedContent">
+    <header>
+      <h1><img src="Herz.png" height="2%"> <img src="Herz.png" height="3%"> Love You <img src="Herz.png" height="3%"> <img src="Herz.png" height="2%"></h1>
+    </header>
+    <nav>
+      <a href="Index.html">Startseite</a>
+      <a href="Timer.html">Timer</a>
+      <a href="Bilder.html">Bilder</a>
+      <a href="Advendskalender.html">Advendskalender</a>
+    </nav>
+    <main>
+      <div class="textBox">
+        Diese Website ist nur für dich,<br> weil du einfach die Beste bist.<br><br>
+        Ich liebe dich <br>
+        <a href="https://www.google.com/maps/place/Zur+Sängerwiese,+36419+Buttlar/" target="_blank">
+          <img class="mapHeart" src="braunesherz.png" alt="Herz auf Karte">
+        </a>
+      </div>
+    </main>
+    <footer>
+      <img src="Herz.png" height="0.7%"> für meinen Schatz <img src="Herz.png" height="0.7%">
+    </footer>
+  </div>
+
+  <script>
+    (function(){
+      const CORRECT = "728773"; // Passwort (wie gewünscht)
+      const overlay = document.getElementById("pwOverlay");
+      const pwInput = document.getElementById("pwInput");
+      const pwBtn = document.getElementById("pwBtn");
+      const protectedContent = document.getElementById("protectedContent");
+      const pwBox = document.getElementById("pwBox");
+
+      // Wenn vorher schon freigeschaltet (localStorage), direkt öffnen
+      if (localStorage.getItem("hopfenhasi_auth") === "1") {
+        unlock();
+      } else {
+        overlay.style.display = "flex";
+        pwInput.focus();
+      }
+
+      pwBtn.addEventListener("click", tryPw);
+      pwInput.addEventListener("keydown", function(e){
+        if (e.key === "Enter") tryPw();
+      });
+
+      function tryPw() {
+        const val = pwInput.value || "";
+        if (val === CORRECT) {
+          localStorage.setItem("hopfenhasi_auth", "1");
+          unlock();
+        } else {
+          pwBox.classList.remove("shake");
+          // trigger reflow to restart animation
+          void pwBox.offsetWidth;
+          pwBox.classList.add("shake");
+          pwInput.value = "";
+          pwInput.focus();
+        }
+      }
+
+      function unlock(){
+        overlay.style.display = "none";
+        protectedContent.classList.remove("protected");
+        overlay.setAttribute("aria-hidden", "true");
+      }
+
+      // Optional: Logout-Funktion (entkommentieren, falls du sie willst)
+      // function logout(){ localStorage.removeItem("hopfenhasi_auth"); location.reload(); }
+      // Du könntest z.B. irgendwo ein Button einbauen, der logout() aufruft.
+    })();
+  </script>
 </body>
 </html>
-
